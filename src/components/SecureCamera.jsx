@@ -234,9 +234,9 @@ const SecureCamera = ({ onCapture, onClose }) => {
                     </div>
 
                     {/* Trust Badge */}
-                    <div className="flex items-center gap-3 bg-green-50 border border-green-100 rounded-2xl p-4 mb-8">
-                        <Shield className="w-5 h-5 text-green-600 flex-shrink-0" />
-                        <p className="text-sm text-green-700 leading-relaxed">
+                    <div className="flex items-start gap-3 bg-green-50 border border-green-100 rounded-2xl p-4 sm:p-5 mb-6 sm:mb-8">
+                        <Shield className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                        <p className="text-xs sm:text-sm text-green-700 leading-relaxed">
                             Photos taken here receive <strong>highest trust level</strong> — GPS coordinates, device timestamp, and a SHA2-256 hash are embedded at the moment of capture.
                         </p>
                     </div>
@@ -351,42 +351,27 @@ const SecureCamera = ({ onCapture, onClose }) => {
                         <div className="flex-1 relative bg-black flex items-center justify-center">
                             <img src={capturedImage.url} className="max-h-full max-w-full object-contain" alt="Captured" />
 
-                            {/* Trust Level Banner */}
-                            <div className="absolute top-6 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-green-500 px-6 py-2.5 rounded-full shadow-2xl">
-                                <Shield className="w-5 h-5 text-white" />
-                                <span className="text-sm font-bold text-white">Verified Human-Shot · Secure Enclave</span>
-                            </div>
+                            {/* Provenance Stamp is already on the canvas image, no redundant UI labels needed here */}
 
-                            {/* GPS + Timestamp overlay */}
-                            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
-                                <div className="bg-black/60 backdrop-blur-md rounded-xl px-4 py-2 flex items-center gap-2">
-                                    <MapPin className="w-4 h-4 text-green-400" />
-                                    <span className="text-xs text-white font-mono">
-                                        {gpsCoords ? `${gpsCoords.lat}, ${gpsCoords.lng}` : 'No GPS'}
-                                    </span>
-                                </div>
-                                <div className="bg-black/60 backdrop-blur-md rounded-xl px-4 py-2">
-                                    <span className="text-xs text-white font-mono">{new Date(capturedImage.timestamp).toLocaleTimeString()}</span>
-                                </div>
-                            </div>
+
                         </div>
 
                         {/* Action Bar */}
-                        <div className="bg-black px-8 py-8 flex items-center justify-between">
+                        <div className="bg-black px-6 sm:px-8 py-6 sm:py-8 flex items-center justify-between border-t border-white/5 gap-4">
                             <button
                                 onClick={retake}
-                                className="flex items-center gap-2 px-6 py-3 bg-white/10 border border-white/20 text-white rounded-2xl font-bold hover:bg-white/20 transition-colors"
+                                className="flex-1 flex items-center justify-center gap-2 px-4 sm:px-6 py-4 bg-white/10 border border-white/20 text-white rounded-2xl font-bold hover:bg-white/20 transition-colors active:scale-95"
                             >
                                 <RefreshCw className="w-4 h-4" />
-                                Retake
+                                <span className="text-[14px]">Retake</span>
                             </button>
 
                             <button
                                 onClick={confirmCapture}
-                                className="flex items-center gap-3 px-8 py-4 bg-[#FF385C] text-white rounded-2xl font-bold text-lg hover:bg-[#E31C5F] transition-colors shadow-2xl shadow-[#FF385C]/30 active:scale-[0.97]"
+                                className="flex-[1.5] flex items-center justify-center gap-3 px-6 sm:px-8 py-4 bg-[#FF385C] text-white rounded-2xl font-bold text-[14px] sm:text-lg hover:bg-[#E31C5F] transition-colors shadow-2xl shadow-[#FF385C]/30 active:scale-[0.97]"
                             >
                                 <CheckCircle className="w-5 h-5" />
-                                Add to Library
+                                <span className="text-[14px] sm:text-base">Add to Library</span>
                             </button>
                         </div>
                     </div>
